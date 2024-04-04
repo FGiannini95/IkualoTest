@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import './register.scss'
 
 const initialValue = {
   name: "",
@@ -17,7 +18,6 @@ export const Register = () => {
   const [msgError, setMsgError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
-
   const navigate = useNavigate();
 
   const verPassword = () => {
@@ -68,79 +68,76 @@ export const Register = () => {
   };
 
   return (
-    <Row className="d-flex justify-content-center p-5">
-      <Col md={4}>
-        <Form>
-          <h2>Registro</h2>
-          <Form.Group className="mb-3" controlId="formBasicName">
-            <Form.Label></Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Nombre"
-              name="name"
-              // value={register.name}
-              onChange={handleChange}
-              autoFocus
-            />
-            <Form.Label></Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Apellidos"
-              name="lastname"
-              // value={register.name}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label></Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Email"
-              name="email"
-              // value={register.email}
-              onChange={handleChange}
-            />
-            <Form.Label></Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Repetir email"
-              name="email2"
-              // value={register.email}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label></Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Contraseña"
-              name="password"
-              // value={register.password}
-              onChange={handleChange}
-            />{" "}
-            <Form.Label></Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Repetir contraseña"
-              name="password2"
-              // value={register.password}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <p>{msgError}</p>
-
-          <Button variant="primary me-2" onClick={handleSubmit}>
-            Aceptar
-          </Button>
-
-          <Button variant="primary" onClick={() => navigate("/")}>
-            Cancelar
-          </Button>
-          <p>
-            Ya estás registrado? <Link to="/login">Loguéate</Link>
-          </p>
-        </Form>
-      </Col>
-    </Row>
+    <Container fluid className="registro">
+      <Row className="justify-content-center p-5 registro text-center">
+        <Col md={6}>
+          <Form>
+            <h2>Registro</h2>
+            <Form.Group className="mb-3" controlId="formBasicName">
+              <Form.Control
+                type="text"
+                placeholder="Nombre"
+                name="name"
+                onChange={handleChange}
+                autoFocus
+                value={register.name}
+                style={{ marginBottom: '11px' }}
+              />
+              <Form.Control
+                type="text"
+                placeholder="Apellidos"
+                name="lastname"
+                onChange={handleChange}
+                value={register.lastname}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Control
+                type="text"
+                placeholder="Email"
+                name="email"
+                onChange={handleChange}
+                style={{ marginBottom: '11px' }}
+                value={register.email}
+              />
+              <Form.Control
+                type="text"
+                placeholder="Repetir email"
+                name="email2"
+                onChange={handleChange}
+                value={register.email2}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Control
+                type="password"
+                placeholder="Contraseña"
+                name="password"
+                onChange={handleChange}
+                style={{ marginBottom: '10px' }}
+                value={register.password}
+              />
+              <Form.Control
+                type="password"
+                placeholder="Repetir contraseña"
+                name="password2"
+                onChange={handleChange}
+                value={register.password2}
+              />
+            </Form.Group>
+            <p>{msgError}</p>
+            <Button variant="primary me-2" onClick={handleSubmit}>
+              Aceptar
+            </Button>
+            <Button variant="primary" onClick={() => navigate("/")}>
+              Cancelar
+            </Button>
+            <p>
+              ¿Ya estás registrado? <Link to="/login">Loguéate</Link>
+            </p>
+          </Form>
+        </Col>
+      </Row>
+    </Container>
   );
 };

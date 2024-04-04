@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { useContext } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { IkauloContext } from "../../../context/IkauloContext";
 import axios from "axios";
+import './login.scss'
 
 const initialValue = {
   email: "",
@@ -13,12 +12,9 @@ const initialValue = {
 export const Login = () => {
   const [login, setLogin] = useState(initialValue);
   const [msgError, setMsgError] = useState("");
-
-  const { setToken, setIsLogged } = useContext(IkauloContext);
-
   const navigate = useNavigate();
 
-  const handleChange = () => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setLogin({ ...login, [name]: value });
   };
@@ -37,47 +33,43 @@ export const Login = () => {
   };
 
   return (
-    <Row className="d-flex justify-content-center p-5">
-      <Col md={4}>
-        <Form>
-          <h2>Login</h2>
-          <Form.Group className="mb-3" controlId="formBasicName">
-            <Form.Label></Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter email"
-              name="email"
-              //value={login.email}
-              onChange={handleChange}
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label></Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Enter password"
-              name="password"
-              //value={login.password}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <p>{msgError}</p>
-
-          <Button variant="primary me-2" onClick={handleSubmit}>
-            Aceptar
-          </Button>
-          <Button variant="primary" onClick={() => navigate("/")}>
-            Cancelar
-          </Button>
-          <p>
-            ¿No estás registrado? <Link to={"/registro"}>Regístrate</Link>
-          </p>
-          <p>
-            ¿Has olvidado tu contraseña?{" "} <Link to="/recoverpassword">Haz click aquí</Link>
-          </p>
-        </Form>
-      </Col>
-    </Row>
+    <Container fluid className="login">
+      <Row className="justify-content-center">
+        <Col md={6}>
+          <Form className="p-5 login text-center">
+            <h2>Login</h2>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Control
+                type="text"
+                placeholder="Enter email"
+                name="email"
+                onChange={handleChange}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Control
+                type="password"
+                placeholder="Enter password"
+                name="password"
+                onChange={handleChange}
+              />
+            </Form.Group>
+            <p>{msgError}</p>
+            <Button variant="primary me-2" onClick={handleSubmit}>
+              Aceptar
+            </Button>
+            <Button variant="primary" onClick={() => navigate("/")}>
+              Cancelar
+            </Button>
+            <p>
+              ¿No estás registrado? <Link to={"/registro"}>Regístrate</Link>
+            </p>
+            <p>
+              ¿Has olvidado tu contraseña? <Link to="/recoverpassword">Haz click aquí</Link>
+            </p>
+          </Form>
+        </Col>
+      </Row>
+    </Container>
   );
 };

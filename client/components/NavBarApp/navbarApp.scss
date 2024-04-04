@@ -5,3 +5,20 @@
 .navbar-container {
   --navbar-height: 809px !important;
 }
+
+.nav-link {
+  margin-right: 10px; // Agrega un margen derecho entre los elementos del menú
+}
+
+button{
+  border: 1px solid #502BDA;
+  background-color: transparent;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+
+button:hover{
+  background-color: #502BDA;
+  color: white;
+}

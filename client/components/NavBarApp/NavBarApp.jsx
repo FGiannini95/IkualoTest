@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -8,10 +8,16 @@ import './navbarApp.scss'
 
 
 export const NavBarApp = () => {
-  const navigate = useNavigate()
+  const [showMenu, setShowMenu] = useState(false);
+  const navigate = useNavigate();
+
   const handleClick = () => {
     navigate('/registro')
   }
+
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  };
 
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
@@ -19,7 +25,7 @@ export const NavBarApp = () => {
         <Navbar.Brand as={Link} to="/">
           <img src="/images/logo.png"/>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={toggleMenu}/>
         <Navbar.Collapse id="basic-navbar-nav w-100">
           <Nav className="me-auto d-flex w-100 ">
             <div className="d-flex justify-content-end w-100">
@@ -33,10 +39,7 @@ export const NavBarApp = () => {
                 <Nav.Link as={Link} to="/about">
                   ÍkuaBlog
                 </Nav.Link>
-                <Nav.Link as={Link} to="/about">
-                  Íkualo en los medios
-                </Nav.Link>
-                <Button variant="light" onClick={handleClick}>REGÍSTRATE</Button>
+                <button variant="light" onClick={handleClick}>REGÍSTRATE</button>
               </div>
             </div>
           </Nav>
