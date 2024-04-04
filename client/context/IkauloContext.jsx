@@ -1,6 +1,6 @@
 import React, {createContext, useEffect, useState } from 'react';
 import {getLocalStorage} from '../helpers/localStorage';
-import {jwtDecode} from 'jwt-decode'
+import { jwtDecode } from "jwt-decode";
 import axios from 'axios';
 
 export const IkauloContext = createContext();
@@ -16,7 +16,8 @@ export const IkauloProvider = ({children}) => {
     setToken(tokenLocalStorage)
 
     if(tokenLocalStorage){
-      const {id} = jwtDecode(tokenLocalStorage).user
+      const { id } = jwtDecode(tokenLocalStorage).user;
+
       axios
         .get(`http://localhost:3000/users/oneuser/${id}`)
         .then((res)=>console.log(res)) //TODO
