@@ -35,7 +35,7 @@ export const Register = () => {
         setMsgError("Completa todos los campos")
     }else{
         axios
-            .post("http://localhost:3000", register)
+            .post("http://localhost:3000/users/createuser", register)
             .then((res)=>{
                 navigate('/login')
             })
