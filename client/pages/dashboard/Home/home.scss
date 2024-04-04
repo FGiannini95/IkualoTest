@@ -1,0 +1,29 @@
+.home {
+  background-color: #502BDA;
+  color: white;
+  min-height: 100vh;
+
+  .title {
+    font-size: 5rem;
+    padding-top: 1rem;
+  }
+
+  .subtitle {
+    &__1 {
+      font-size: 1.5rem;
+    }
+    &__2 {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+    &__3 {
+      color: #05CFD9;
+      font-size: 1.5rem;
+    }
+    &__4 {
+      color: #05CFD9;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+  }
+}

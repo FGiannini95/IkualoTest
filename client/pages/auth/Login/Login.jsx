@@ -7,31 +7,33 @@ import axios from "axios";
 
 const initialValue = {
   email: "",
-  password: ""
-}
+  password: "",
+};
 
 export const Login = () => {
   const [login, setLogin] = useState(initialValue);
   const [msgError, setMsgError] = useState("");
-  
-  const {setToken, setIsLogged} = useContext(IkauloContext)
+
+  const { setToken, setIsLogged } = useContext(IkauloContext);
 
   const navigate = useNavigate();
 
   const handleChange = () => {
-    const {name, value} = e.target;
-    setLogin({...login, [name]:value})
+    const { name, value } = e.target;
+    setLogin({ ...login, [name]: value });
   };
 
   const handleSubmit = () => {
     axios
       .post("http://localhost:3000/users/login", login)
-      .then((res)=>{
-        setIsLogged(true)
-        setToken(res.data.token)
-        saveLocalStorage("token", res.data.token)
+      .then((res) => {
+        setIsLogged(true);
+        setToken(res.data.token);
+        saveLocalStorage("token", res.data.token);
       })
-      .catch((err)=>{setMsgError(err.response.data)})
+      .catch((err) => {
+        setMsgError(err.response.data);
+      });
   };
 
   return (
@@ -40,7 +42,7 @@ export const Login = () => {
         <Form>
           <h2>Login</h2>
           <Form.Group className="mb-3" controlId="formBasicName">
-            <Form.Label>Email</Form.Label>
+            <Form.Label></Form.Label>
             <Form.Control
               type="text"
               placeholder="Enter email"
@@ -51,7 +53,7 @@ export const Login = () => {
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
+            <Form.Label></Form.Label>
             <Form.Control
               type="password"
               placeholder="Enter password"
@@ -69,7 +71,10 @@ export const Login = () => {
             Cancelar
           </Button>
           <p>
-            No estás registrado? <Link to={"/registro"}>Regístrate</Link>
+            ¿No estás registrado? <Link to={"/registro"}>Regístrate</Link>
+          </p>
+          <p>
+            ¿Has olvidado tu contraseña?{" "} <Link to="/recoverpassword">Haz click aquí</Link>
           </p>
         </Form>
       </Col>

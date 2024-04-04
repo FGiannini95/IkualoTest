@@ -15,8 +15,18 @@ const initialValue = {
 export const Register = () => {
   const [register, setRegister] = useState(initialValue);
   const [msgError, setMsgError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
 
   const navigate = useNavigate();
+
+  const verPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const verPassword2 = () => {
+    setShowPassword2(!showPassword2);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,6 +34,7 @@ export const Register = () => {
   };
 
   const handleSubmit = (e) => {
+    e.preventDefault();
     if (
       !register.name ||
       !register.lastname ||
@@ -33,23 +44,27 @@ export const Register = () => {
       !register.password2
     ) {
       setMsgError("Completa todos los campos");
-    }else{
+    } else if (register.email !== register.email2) {
+      setMsgError("Los correos no coinciden");
+    } else if (register.password !== register.password2) {
+      setMsgError("Las contraseñas no coinciden");
+    } else {
       axios
-          .post("http://localhost:3000/users/createuser", register)
-          .then((res)=>{
-              navigate('/login')
-          })
-          .catch((err)=>{
-              console.log(err);
-              if(err.response.data.error?.errno === 1062){
-                  setMsgError("Email duplicado")
-              }else if(err.response.data.error?.errno === 1406){
-                  setMsgError("campo demasiado largo")
-              }else{
-                  setMsgError("upps ha habido algún error")
-              }
-          })
-  }
+        .post("http://localhost:3000/users/createuser", register)
+        .then((res) => {
+          navigate("/login");
+        })
+        .catch((err) => {
+          console.log(err);
+          if (err.response.data.error?.errno === 1062) {
+            setMsgError("Email duplicado");
+          } else if (err.response.data.error?.errno === 1406) {
+            setMsgError("Campo demasiado largo");
+          } else {
+            setMsgError("Upps ha habido algún error");
+          }
+        });
+    }
   };
 
   return (
@@ -58,7 +73,7 @@ export const Register = () => {
         <Form>
           <h2>Registro</h2>
           <Form.Group className="mb-3" controlId="formBasicName">
-            <Form.Label>Nombre</Form.Label>
+            <Form.Label></Form.Label>
             <Form.Control
               type="text"
               placeholder="Nombre"
@@ -67,7 +82,7 @@ export const Register = () => {
               onChange={handleChange}
               autoFocus
             />
-            <Form.Label>Apellidos</Form.Label>
+            <Form.Label></Form.Label>
             <Form.Control
               type="text"
               placeholder="Apellidos"
@@ -77,7 +92,7 @@ export const Register = () => {
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email</Form.Label>
+            <Form.Label></Form.Label>
             <Form.Control
               type="text"
               placeholder="Email"
@@ -85,7 +100,7 @@ export const Register = () => {
               // value={register.email}
               onChange={handleChange}
             />
-            <Form.Label>Repetir Email</Form.Label>
+            <Form.Label></Form.Label>
             <Form.Control
               type="text"
               placeholder="Repetir email"
@@ -95,7 +110,7 @@ export const Register = () => {
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Contraseña</Form.Label>
+            <Form.Label></Form.Label>
             <Form.Control
               type="password"
               placeholder="Contraseña"
@@ -103,7 +118,7 @@ export const Register = () => {
               // value={register.password}
               onChange={handleChange}
             />{" "}
-            <Form.Label>Repetir contraseña</Form.Label>
+            <Form.Label></Form.Label>
             <Form.Control
               type="password"
               placeholder="Repetir contraseña"

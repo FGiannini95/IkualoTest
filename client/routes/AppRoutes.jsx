@@ -4,7 +4,9 @@ import { Home } from "../pages/dashboard/Home/Home";
 import { ErrorPage } from "../pages/dashboard/Error/ErrorPage";
 import { Login } from "../pages/auth/Login/Login";
 import { Register } from "../pages/auth/Register/Register";
-import  NavBarApp  from "../components/NavBarApp/NavBarApp";
+import { NavBarApp } from "../components/NavBarApp/NavBarApp";
+import { About } from "../pages/dashboard/About/About";
+
 
 export const AppRoutes = () => {
   return (
@@ -14,6 +16,7 @@ export const AppRoutes = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Register />} />
+        <Route path="/about" element={<About/>} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
