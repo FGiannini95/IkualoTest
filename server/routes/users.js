@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
+var usersControllers = require("../controllers/usersControllores");
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+//ruta base http://localhost:3000/users
+router.get('/createuser', usersControllers.createUser);
+router.post('/login', usersControllers.login);
 
 module.exports = router;
