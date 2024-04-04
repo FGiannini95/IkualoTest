@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import axios from 'axios'
+import axios from "axios";
 
 const initialValue = {
   name: "",
@@ -24,33 +24,33 @@ export const Register = () => {
   };
 
   const handleSubmit = (e) => {
-    if(
+    if (
       !register.name ||
       !register.lastname ||
       !register.email ||
       !register.email2 ||
       !register.password ||
       !register.password2
-      ){
-        setMsgError("Completa todos los campos")
+    ) {
+      setMsgError("Completa todos los campos");
     }else{
-        axios
-            .post("http://localhost:3000/users/createuser", register)
-            .then((res)=>{
-                navigate('/login')
-            })
-            .catch((err)=>{
-                console.log(err);
-                if(err.response.data.error?.errno === 1062){
-                    setMsgError("Email duplicado")
-                }else if(err.response.data.error?.errno === 1406){
-                    setMsgError("Campo demasiado largo")
-                }else{
-                    setMsgError("Upps ha habido algún error")
-                }
-            })
-    }
-}
+      axios
+          .post("http://localhost:3000/users/createuser", register)
+          .then((res)=>{
+              navigate('/login')
+          })
+          .catch((err)=>{
+              console.log(err);
+              if(err.response.data.error?.errno === 1062){
+                  setMsgError("Email duplicado")
+              }else if(err.response.data.error?.errno === 1406){
+                  setMsgError("campo demasiado largo")
+              }else{
+                  setMsgError("upps ha habido algún error")
+              }
+          })
+  }
+  };
 
   return (
     <Row className="d-flex justify-content-center p-5">
@@ -71,7 +71,7 @@ export const Register = () => {
             <Form.Control
               type="text"
               placeholder="Apellidos"
-              name="surname"
+              name="lastname"
               // value={register.name}
               onChange={handleChange}
             />
@@ -105,9 +105,9 @@ export const Register = () => {
             />{" "}
             <Form.Label>Repetir contraseña</Form.Label>
             <Form.Control
-              type="password2"
+              type="password"
               placeholder="Repetir contraseña"
-              name="password"
+              name="password2"
               // value={register.password}
               onChange={handleChange}
             />

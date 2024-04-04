@@ -6,7 +6,7 @@ require('dotenv').config();
 class usersControllers {
 
   createUser = (req, res) => {
-    const {name, email, password} = req.body;
+    const {name, lastname, email, password} = req.body;
     //validación
     //enciptamiento
     let saltRounds = 8;
@@ -25,7 +25,7 @@ class usersControllers {
               console.log(error);
               error
                 ? res.status(500).json({error})
-                : res.status(200).json(result)
+                : res.status(200).json({ message: 'Usuario creado correctamente' })
             })
         }
       })
@@ -34,6 +34,10 @@ class usersControllers {
 
   login = (req, res) => {
     console.log("hellou");
+  }
+
+  oneUser = (req, res) => {
+    console.log("hellou user");
   }
 
 }

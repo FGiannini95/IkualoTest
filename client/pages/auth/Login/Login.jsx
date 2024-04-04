@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { useContext } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import { IkauloContext } from "../../../context/IkauloContext";
+import axios from "axios";
 
 const initialValue = {
   email: "",
@@ -10,6 +13,8 @@ const initialValue = {
 export const Login = () => {
   const [login, setLogin] = useState(initialValue);
   const [msgError, setMsgError] = useState("");
+  
+  const {setToken, setIsLogged} = useContext(IkauloContext)
 
   const navigate = useNavigate();
 
@@ -18,7 +23,16 @@ export const Login = () => {
     setLogin({...login, [name]:value})
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = () => {
+    axios
+      .post("http://localhost:3000/users/login", login)
+      .then((res)=>{
+        setIsLogged(true)
+        setToken(res.data.token)
+        saveLocalStorage("token", res.data.token)
+      })
+      .catch((err)=>{setMsgError(err.response.data)})
+  };
 
   return (
     <Row className="d-flex justify-content-center p-5">

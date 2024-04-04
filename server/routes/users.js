@@ -5,5 +5,6 @@ var usersControllers = require("../controllers/usersControllores");
 //ruta base http://localhost:3000/users
 router.get('/createuser', usersControllers.createUser);
 router.post('/login', usersControllers.login);
+router.get('/oneuser/:id', usersControllers.oneUser);
 
 module.exports = router;
