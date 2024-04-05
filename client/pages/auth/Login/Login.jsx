@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import '../../../public/stylesheets/general.scss'
+import { IkauloContext } from "../../../context/IkauloContext";
+import { saveLocalStorage } from "../../../helpers/localStorage";
 
 const initialValue = {
   email: "",
@@ -11,6 +13,7 @@ const initialValue = {
 
 export const Login = () => {
   const [login, setLogin] = useState(initialValue);
+  const {setUser, setToken, setIsLogged} = useContext(IkauloContext)
   const [msgError, setMsgError] = useState("");
   const navigate = useNavigate();
 
@@ -23,12 +26,16 @@ export const Login = () => {
     axios
       .post("http://localhost:3000/users/login", login)
       .then((res) => {
+        console.log("aaa", res);
         setIsLogged(true);
+        setUser(res.data.user)
         setToken(res.data.token);
         saveLocalStorage("token", res.data.token);
+        navigate('/')
       })
       .catch((err) => {
-        setMsgError(err.response.data);
+        console.log(err);
+        //setMsgError(err.response.data);
       });
   };
 

@@ -9,7 +9,7 @@ import { IkauloContext } from "../../context/IkauloContext";
 import { delLocalStorage } from "../../helpers/localStorage";
 
 export const NavBarApp = () => {
-  const { user, setUser, toke, setToken, setIsLogged } =
+  const { user, setUser, setToken, setIsLogged } =
     useContext(IkauloContext);
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
@@ -58,10 +58,16 @@ export const NavBarApp = () => {
                   </>
                 ) : (
                   <>
-                    <p>{`${user.name.charAt(0).toUpperCase()}${user.lastname.charAt(0).toUpperCase()}`}</p>
-                    <button variant="light" onClick={logOut}>
-                      LOGOUT
-                    </button>
+                    <div className="d-flex align-items-center">
+                      <p className="m-0">{`${user.name
+                        .charAt(0)
+                        .toUpperCase()}${user.lastname
+                        .charAt(0)
+                        .toUpperCase()}`}</p>
+                      <button variant="light" onClick={logOut} style={{ marginLeft: '5px' }}>
+                        LOGOUT
+                      </button>
+                    </div>
                   </>
                 )}
               </div>

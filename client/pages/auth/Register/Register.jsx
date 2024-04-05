@@ -3,6 +3,8 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../../../public/stylesheets/general.scss"
+import { registerValidator } from "../../../utils/registerValidator";
+
 
 const initialValue = {
   name: "",
@@ -35,20 +37,10 @@ export const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      !register.name ||
-      !register.lastname ||
-      !register.email ||
-      !register.email2 ||
-      !register.password ||
-      !register.password2
-    ) {
-      setMsgError("Completa todos los campos");
-    } else if (register.email !== register.email2) {
-      setMsgError("Los correos no coinciden");
-    } else if (register.password !== register.password2) {
-      setMsgError("Las contraseñas no coinciden");
-    } else {
+    const validate = registerValidator(register);
+    if(!validate.validate) {
+      setMsgError(validate.message)}
+     else {
       axios
         .post("http://localhost:3000/users/createuser", register)
         .then((res) => {
