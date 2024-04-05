@@ -1,4 +1,3 @@
-import "./App.css";
 import { AppRoutes } from "../routes/AppRoutes";
 import { IkauloProvider } from "../context/IkauloContext";
 import 'bootstrap/dist/css/bootstrap.min.css';

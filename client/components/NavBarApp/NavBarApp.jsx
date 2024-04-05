@@ -40,7 +40,7 @@ export const NavBarApp = () => {
         <Navbar.Collapse id="basic-navbar-nav w-100">
           <Nav className="me-auto d-flex w-100 ">
             <div className="d-flex justify-content-end w-100">
-              <div className="d-flex">
+              <div className="navBarMovil d-flex">
                 <Nav.Link as={Link} to="/">
                   Qué es Ikaulo?
                 </Nav.Link>

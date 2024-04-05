@@ -2,10 +2,6 @@
     padding: 1rem;
   }
 
-.navbar-container {
-  --navbar-height: 809px !important;
-}
-
 .nav-link {
   margin-right: 10px; // Agrega un margen derecho entre los elementos del menú
 }
@@ -21,4 +17,11 @@ button{
 button:hover{
   background-color: #502BDA;
   color: white;
+}
+
+@media (max-width: 440px){
+  .navBarMovil{
+    display: flex;
+    flex-direction: column;
+  }
 }

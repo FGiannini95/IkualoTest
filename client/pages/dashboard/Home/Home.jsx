@@ -8,7 +8,7 @@ export const Home = () => {
       <Container fluid>
         <Row className='justify-content-center'>
           <Col xs={12} className='text-center'>
-            <h1 className='title'>Welcome to IKUALO</h1>
+            <h1 className='title'>Welcome to ÍKUALO</h1>
           </Col>
         </Row>
         <Row className='justify-content-center'>
