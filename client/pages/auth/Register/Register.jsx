@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import './register.scss'
+import "../../../public/stylesheets/general.scss"
 
 const initialValue = {
   name: "",
@@ -68,7 +68,7 @@ export const Register = () => {
   };
 
   return (
-    <Container fluid className="registro">
+    <Container fluid className="formulario">
       <Row className="justify-content-center p-5 registro text-center">
         <Col md={6}>
           <Form>
@@ -81,8 +81,10 @@ export const Register = () => {
                 onChange={handleChange}
                 autoFocus
                 value={register.name}
-                style={{ marginBottom: '11px' }}
+                style={{ marginBottom: "11px" }}
               />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicName">
               <Form.Control
                 type="text"
                 placeholder="Apellidos"
@@ -97,9 +99,11 @@ export const Register = () => {
                 placeholder="Email"
                 name="email"
                 onChange={handleChange}
-                style={{ marginBottom: '11px' }}
+                style={{ marginBottom: "11px" }}
                 value={register.email}
               />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicName">
               <Form.Control
                 type="text"
                 placeholder="Repetir email"
@@ -114,9 +118,11 @@ export const Register = () => {
                 placeholder="Contraseña"
                 name="password"
                 onChange={handleChange}
-                style={{ marginBottom: '10px' }}
+                style={{ marginBottom: "10px" }}
                 value={register.password}
               />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Control
                 type="password"
                 placeholder="Repetir contraseña"

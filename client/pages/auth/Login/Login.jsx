@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import './login.scss'
+import '../../../public/stylesheets/general.scss'
 
 const initialValue = {
   email: "",
@@ -33,7 +33,7 @@ export const Login = () => {
   };
 
   return (
-    <Container fluid className="login">
+    <Container fluid className="formulario">
       <Row className="justify-content-center">
         <Col md={6}>
           <Form className="p-5 login text-center">

@@ -1,4 +1,32 @@
-.registro{
+*{
+  h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+  }
+  
+  p {
+    text-wrap: pretty;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 0.75rem;
+}
+
+::-webkit-scrollbar-track {
+  background-color: black;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #502BDA;
+  border-radius: 1rem;
+  border: 2px solid black;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #05CFD9;
+}
+
+.formulario{
   background-color: #502BDA;
   color: white;
   min-height: 100vh;
@@ -13,7 +41,7 @@
     margin: 0.5rem;
     transition: background-color 0.3s ease;
   }
-  button:hover{
+  Button:hover{
     background-color: white;
     color: #502BDA;
     font-weight: bold;
@@ -23,4 +51,5 @@
     color:  #05CFD9;
     text-decoration: none; 
   }
+
 }
