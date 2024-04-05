@@ -9,8 +9,7 @@ const registerValidator = (register) => {
     !register.password ||
     !register.password2 ||
     register.email !== register.email2 ||
-    register.password !== register.password2||
-    register.email //expresión regular
+    register.password !== register.password2
   ) {
     res = false;
   }

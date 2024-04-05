@@ -53,7 +53,7 @@ export const Register = () => {
           } else if (err.response.data.error?.errno === 1406) {
             setMsgError("Campo demasiado largo");
           } else {
-            setMsgError("Upps ha habido algún error");
+            setMsgError("Upps ha habido algún error!!");
           }
         });
     }

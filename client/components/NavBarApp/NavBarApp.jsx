@@ -14,8 +14,12 @@ export const NavBarApp = () => {
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleRegistro = () => {
     navigate("/registro");
+  };
+
+  const handleLogin = () => {
+    navigate("/login");
   };
 
   const toggleMenu = () => {
@@ -52,8 +56,11 @@ export const NavBarApp = () => {
                 </Nav.Link>
                 {!user ? (
                   <>
-                    <button variant="light" onClick={handleClick}>
+                    <button variant="light" onClick={handleRegistro}>
                       REGÍSTRATE
+                    </button>
+                    <button variant="light" onClick={handleLogin}>
+                      LOGIN
                     </button>
                   </>
                 ) : (

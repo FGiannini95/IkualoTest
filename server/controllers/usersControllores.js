@@ -1,7 +1,7 @@
 const connection = require("../config/db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const  registerValidator = require("../utils/registerValidator");
+const  registerValidator  = require("../utils/registerValidator");
 require("dotenv").config();
 
 class usersControllers {
@@ -56,7 +56,6 @@ class usersControllers {
         const user = result[0];
         //comparación de las contraseñas
         const hash = user.password;
-        console.log("u", user);
         bcrypt.compare(password, hash, (error, response) => {
           if (error) return res.status(500).json(error);
           if (response == true) {
