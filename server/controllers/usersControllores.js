@@ -120,21 +120,6 @@ class usersControllers {
       });
     });
   };
-
-  me = (req, res) => {
-    const headers = req.headers;
-    const authorizationHeader = headers.authorization;
-    const token = authorizationHeader.replace("Bearer ", "");
-    const decodeToken = jwt.verify(token, process.env.SECRET)
-    const id = decodeToken.user.id;
-    let sql = `SELECT * 
-    FROM user 
-    WHERE id = ${id} and is_deleted = 0`;
-
-    connection.query(sql, (error, result) => {
-      error ? res.status(500).json({ error }) : res.status(200).json(result);
-    });
-  };
 }
 
 module.exports = new usersControllers();
