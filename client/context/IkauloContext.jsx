@@ -15,10 +15,19 @@ export const IkauloProvider = ({ children }) => {
     setToken(tokenLocalStorage);
 
     if (tokenLocalStorage) {
-      const { id } = jwtDecode(tokenLocalStorage).user;
+      // const { id } = jwtDecode(tokenLocalStorage).user;
 
+      // axios
+      //   .get(`http://localhost:3000/users/oneuser/${id}`)
+      //   .then((res) => {
+      //     setUser(res.data[0]);
+      //     setIsLogged(true);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
       axios
-        .get(`http://localhost:3000/users/oneuser/${id}`)
+        .get(`http://localhost:3000/users/me`, {headers: {Authorization: `Bearer ${tokenLocalStorage}`}})
         .then((res) => {
           setUser(res.data[0]);
           setIsLogged(true);

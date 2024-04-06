@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import "./modal.scss";
 import { EyeClosed } from "../../../components/svg/EyeClosed";
 import { EyeOpen } from "../../../components/svg/EyeOpen";
+import axios from "axios";
+
+const initialValue = {
+  password: "",
+}
 
 export const ModalRecoverPassword = ({
   showModal,
@@ -11,6 +16,30 @@ export const ModalRecoverPassword = ({
   showPassword,
   verPassword,
 }) => {
+
+  const [recover, setRecover] = useState(initialValue);
+  const [msgError, setMsgError] = useState("");
+
+  const handleChange = (e) => {
+    setRecover({
+      ...recover,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const handleSubmit = () => {;
+    axios
+      .put("http://localhost:3000/users/recoverpassword", recover)
+      .then((res)=>{
+        console.log(res);
+        setMsgError("Contraseña actualizada")
+        handleCloseModal()
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+  }
+
   return (
     <Modal
       show={showModal}
@@ -28,9 +57,9 @@ export const ModalRecoverPassword = ({
             type="text"
             placeholder="Email"
             name="email"
-            //onChange={handleChange}
+            onChange={handleChange}
             style={{ marginBottom: "11px" }}
-            //value={register.email}
+            value={recover.email}
             autoComplete
             autoFocus
           />
@@ -43,8 +72,8 @@ export const ModalRecoverPassword = ({
             type={showPassword ? "text" : "password"}
             placeholder="Nueva contraseña"
             name="password"
-            //onChange={handleChange}
-            //value={register.password}
+            onChange={handleChange}
+            value={recover.password}
           />
           <span
             className="eye-icon position-absolute pointer"
@@ -57,14 +86,13 @@ export const ModalRecoverPassword = ({
             )}
           </span>
         </Form.Group>
-  
-        <button className="btnModale" onClick={handleCloseModal}>
+
+        <button className="btnModale" onClick={handleSubmit}>
           Aceptar
         </button>
         <button className="btnModale" onClick={handleCloseModal}>
           Cancelar
         </button>
-     
       </Modal.Body>
     </Modal>
   );

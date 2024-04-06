@@ -1,7 +1,7 @@
 const connection = require("../config/db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const  registerValidator  = require("../utils/registerValidator");
+const registerValidator = require("../utils/registerValidator");
 require("dotenv").config();
 
 class usersControllers {
@@ -33,8 +33,8 @@ class usersControllers {
           }
         });
       });
-    }else{
-      res.status(404).json({message: "Ha habido algun problema"})
+    } else {
+      res.status(404).json({ message: "Ha habido algun problema" });
     }
   };
 
@@ -84,7 +84,54 @@ class usersControllers {
       WHERE id = ${id} and is_deleted = 0`;
 
     connection.query(sql, (error, result) => {
-      console.log(result, "++++");
+      error ? res.status(500).json({ error }) : res.status(200).json(result);
+    });
+  };
+
+  recoverPassword = (req, res) => {
+    const { email, password } = req.body;
+    let sql = `SELECT *
+      FROM user
+      WHERE email = '${email}'`;
+    connection.query(sql, (error, result) => {
+      if (error) {
+        res.status(500).json(error);
+        return;
+      }
+      if (result.length === 0) {
+        res.status(500).json({ message: "Usuario no encontrado" });
+        return;
+      }
+      const user = result[0];
+      let saltRounds = 8;
+      bcrypt.genSalt(saltRounds, function (err, saltRounds) {
+        bcrypt.hash(password, saltRounds, function (err, hash) {
+          if (err) {
+            console.log(err);
+          } else {
+            let sql2 = `UPDATE user SET password = '${hash}' WHERE id = '${user.id}'`;
+            connection.query(sql2, (error2, result2) => {
+              error
+                ? res.status(500).json({ error2 })
+                : res.status(200).json(result2);
+            });
+          }
+        });
+      });
+    });
+  };
+
+  me = (req, res) => {
+    const headers = req.headers;
+    const authorizationHeader = headers.authorization;
+    const token = authorizationHeader.replace("Bearer ", "");
+    const decodeToken = jwt.verify(token, process.env.SECRET)
+    const id = decodeToken.user.id;
+    let sql = `SELECT * 
+    FROM user 
+    WHERE id = ${id} and is_deleted = 0`;
+
+    connection.query(sql, (error, result) => {
       error ? res.status(500).json({ error }) : res.status(200).json(result);
     });
   };
