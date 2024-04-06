@@ -7,6 +7,7 @@ import { IkauloContext } from "../../../context/IkauloContext";
 import { saveLocalStorage } from "../../../helpers/localStorage";
 import { EyeClosed } from "../../../components/svg/EyeClosed";
 import { EyeOpen } from "../../../components/svg/EyeOpen";
+import { ModalRecoverPassword } from "../ModalRecoverPassword/ModalRecoverPassword";
 
 const initialValue = {
   email: "",
@@ -18,6 +19,7 @@ export const Login = () => {
   const { setUser, setToken, setIsLogged } = useContext(IkauloContext);
   const [msgError, setMsgError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -42,8 +44,16 @@ export const Login = () => {
       })
       .catch((err) => {
         console.log(err);
-        //setMsgError(err.response.data);
+        setMsgError(err.response.data);
       });
+  };
+
+  const handleShowModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
   };
 
   return (
@@ -62,7 +72,10 @@ export const Login = () => {
                 autoComplete
               />
             </Form.Group>
-            <Form.Group className="mb-3 position-relative" controlId="formBasicPassword">
+            <Form.Group
+              className="mb-3 position-relative"
+              controlId="formBasicPassword"
+            >
               <Form.Control
                 type={showPassword ? "text" : "password"}
                 placeholder="Contraseña"
@@ -92,11 +105,20 @@ export const Login = () => {
             </p>
             <p>
               ¿Has olvidado tu contraseña?{" "}
-              <Link to="/recoverpassword">Haz click aquí</Link>
+              <Link to="#" onClick={handleShowModal}>
+                Haz click aquí
+              </Link>
             </p>
           </Form>
         </Col>
       </Row>
+
+      <ModalRecoverPassword
+        handleCloseModal={handleCloseModal}
+        showModal={showModal}
+        showPassword={showPassword}
+        verPassword={verPassword}
+      />
     </Container>
   );
 };

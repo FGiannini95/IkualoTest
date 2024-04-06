@@ -1,0 +1,18 @@
+.modale {
+  background-color: #502bda;
+  color: white;
+  .btnModale {
+    border-radius: 2rem;
+    border: 1px solid white;
+    background-color: transparent;
+    color: white;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    transition: background-color 0.3s ease;
+  }
+  .btnModale:hover {
+    background-color: white;
+    color: #502bda;
+    font-weight: bold;
+  }
+}
