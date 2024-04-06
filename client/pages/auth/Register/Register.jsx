@@ -75,10 +75,10 @@ export const Register = () => {
                 autoFocus
                 value={register.name}
                 style={{ marginBottom: "11px" }}
-                autoComplete
+                autoComplete="name"
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicName">
+            <Form.Group className="mb-3" controlId="formBasicLastName">
               <Form.Control
                 type="text"
                 placeholder="Apellidos"
@@ -96,17 +96,17 @@ export const Register = () => {
                 onChange={handleChange}
                 style={{ marginBottom: "11px" }}
                 value={register.email}
-                autoComplete
+                autoComplete="email"
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicName">
+            <Form.Group className="mb-3" controlId="formBasicEmail2">
               <Form.Control
                 type="text"
                 placeholder="Repetir email"
                 name="email2"
                 onChange={handleChange}
                 value={register.email2}
-                autoComplete
+                autoComplete="email"
               />
             </Form.Group>
             <Form.Group
@@ -119,6 +119,7 @@ export const Register = () => {
                 name="password"
                 onChange={handleChange}
                 value={register.password}
+                autoComplete="off"
               />
               <span
                 className="eye-icon position-absolute pointer"
@@ -133,7 +134,7 @@ export const Register = () => {
             </Form.Group>
             <Form.Group
               className="mb-3 position-relative"
-              controlId="formBasicPassword"
+              controlId="formBasicPassword2"
             >
               <Form.Control
                 type={showPassword2 ? "text" : "password"}
@@ -141,6 +142,7 @@ export const Register = () => {
                 name="password2"
                 onChange={handleChange}
                 value={register.password2}
+                autoComplete="off"
               />
 
               <span

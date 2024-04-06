@@ -15,13 +15,13 @@ const initialValue = {
 };
 
 export const Login = () => {
-  const [login, setLogin] = useState(initialValue);
   const { setUser, setToken, setIsLogged } = useContext(IkauloContext);
+  const [login, setLogin] = useState(initialValue);
   const [msgError, setMsgError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
-
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setLogin({ ...login, [name]: value });
@@ -35,7 +35,6 @@ export const Login = () => {
     axios
       .post("http://localhost:3000/users/login", login)
       .then((res) => {
-        console.log("aaa", res);
         setIsLogged(true);
         setUser(res.data.user);
         setToken(res.data.token);
@@ -44,12 +43,13 @@ export const Login = () => {
       })
       .catch((err) => {
         console.log(err);
-        setMsgError(err.response.data);
+        setMsgError(err.response.data.message);
       });
   };
 
   const handleShowModal = () => {
     setShowModal(true);
+    setLogin(initialValue);
   };
 
   const handleCloseModal = () => {
@@ -69,7 +69,7 @@ export const Login = () => {
                 name="email"
                 onChange={handleChange}
                 autoFocus
-                autoComplete
+                autoComplete="email"
               />
             </Form.Group>
             <Form.Group
@@ -81,6 +81,7 @@ export const Login = () => {
                 placeholder="Contraseña"
                 name="password"
                 onChange={handleChange}
+                autoComplete="off"
               />
               <span
                 className="eye-icon position-absolute pointer"

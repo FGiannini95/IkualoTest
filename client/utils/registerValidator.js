@@ -34,7 +34,7 @@ export const registerValidator = (register) => {
     res.message = "Ingresa un apellido válido";
   } else if (!passwordRegex.test(register.password)) {
     res.validate = false;
-    res.message = "Ingresa una contraseña de 8 caracteres (mayúscula, minúscula, especial)";  
+    res.message = "Ingresa una contraseña de 8 mínimo caracteres (mayúscula, minúscula, especial)";  
   } else if (register.password !== register.password2) {
     res.validate = false;
     res.message = "Las contraseñas no coinciden";

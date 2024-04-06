@@ -1,6 +1,5 @@
 const registerValidator = (register) => {
   let res = true;
-  console.log("aaaa", register);
   if (
     !register.name ||
     !register.lastname ||

@@ -5,9 +5,12 @@ import "./modal.scss";
 import { EyeClosed } from "../../../components/svg/EyeClosed";
 import { EyeOpen } from "../../../components/svg/EyeOpen";
 import axios from "axios";
+import { modalValidator } from "../../../utils/modalValidator";
+
 
 const initialValue = {
-  password: "",
+  email:"",
+  password: ""
 }
 
 export const ModalRecoverPassword = ({
@@ -27,26 +30,39 @@ export const ModalRecoverPassword = ({
     })
   }
 
-  const handleSubmit = () => {;
-    axios
-      .put("http://localhost:3000/users/recoverpassword", recover)
-      .then((res)=>{
-        console.log(res);
-        setMsgError("Contraseña actualizada")
-        handleCloseModal()
-      })
-      .catch((err)=>{
-        console.log(err);
-      })
+  const handleClose = () => {
+    handleCloseModal();
+    setRecover(initialValue);
+    setMsgError("");
   }
+
+  const handleSubmit = () => {
+    // Validación de los campos del formulario utilizando la función registerValidator
+    const validationRes = modalValidator(recover);
+
+    if (!validationRes.validate) {
+      // Si la validación falla, mostramos el mensaje de error correspondiente
+      setMsgError(validationRes.message);
+    } else {
+      axios
+        .put("http://localhost:3000/users/recoverpassword", recover)
+        .then((res) => {
+          console.log(res);
+          setMsgError("Contraseña actualizada");
+          handleCloseModal();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
 
   return (
     <Modal
       show={showModal}
-      onHide={handleCloseModal}
+      onHide={handleClose}
       backdrop="static"
       keyboard={false}
-      className=""
     >
       <Modal.Header closeButton className="modale">
         <Modal.Title>Establecer nueva contraseña</Modal.Title>
@@ -60,7 +76,7 @@ export const ModalRecoverPassword = ({
             onChange={handleChange}
             style={{ marginBottom: "11px" }}
             value={recover.email}
-            autoComplete
+            autoComplete="email"
             autoFocus
           />
         </Form.Group>
@@ -74,6 +90,7 @@ export const ModalRecoverPassword = ({
             name="password"
             onChange={handleChange}
             value={recover.password}
+            autoComplete="off"
           />
           <span
             className="eye-icon position-absolute pointer"
@@ -86,11 +103,12 @@ export const ModalRecoverPassword = ({
             )}
           </span>
         </Form.Group>
+        {msgError && <p>{msgError}</p>}
 
         <button className="btnModale" onClick={handleSubmit}>
           Aceptar
         </button>
-        <button className="btnModale" onClick={handleCloseModal}>
+        <button className="btnModale" onClick={handleClose}>
           Cancelar
         </button>
       </Modal.Body>

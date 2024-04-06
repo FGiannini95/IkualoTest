@@ -7,7 +7,6 @@ require("dotenv").config();
 class usersControllers {
   createUser = (req, res) => {
     const { name, lastname, email, password } = req.body;
-    console.log(req.body);
     //validación
     const validation = registerValidator(req.body);
     if (validation) {
@@ -70,7 +69,7 @@ class usersControllers {
             );
             res.status(200).json({ token, user });
           } else {
-            res.status(401).json("Contraseña incorecta");
+            res.status(401).json({ message: "Contraseña incorrecta" });
           }
         });
       }
