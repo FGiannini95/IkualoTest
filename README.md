@@ -1,4 +1,4 @@
-# Íkualo thecnical test
+# Íkualo technical test
 Register & Login aplication
 ## Prerequisites
 - Have React, Node & VSC installed
