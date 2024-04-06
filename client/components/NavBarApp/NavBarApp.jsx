@@ -16,15 +16,18 @@ export const NavBarApp = () => {
 
   const handleRegistro = () => {
     navigate("/registro");
+    setShowMenu(false);
   };
 
   const handleLogin = () => {
     navigate("/login");
+    setShowMenu(false);
   };
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
+  
 
   const logOut = () => {
     delLocalStorage("token");
@@ -32,6 +35,10 @@ export const NavBarApp = () => {
     setToken();
     setIsLogged(false);
     navigate("/");
+  };
+
+  const closeMenu = () => {
+    setShowMenu(false);
   };
 
   return (
@@ -45,13 +52,13 @@ export const NavBarApp = () => {
           <Nav className="me-auto d-flex w-100 ">
             <div className="d-flex justify-content-end w-100">
               <div className="navBarMovil d-flex">
-                <Nav.Link as={Link} to="/">
+                <Nav.Link as={Link} to="/" onClick={closeMenu}>
                   Qué es Ikaulo?
                 </Nav.Link>
-                <Nav.Link as={Link} to="/about">
+                <Nav.Link as={Link} to="/about" onClick={closeMenu}>
                   Productos
                 </Nav.Link>
-                <Nav.Link as={Link} to="/about">
+                <Nav.Link as={Link} to="/about" onClick={closeMenu}>
                   ÍkuaBlog
                 </Nav.Link>
                 {!user ? (
