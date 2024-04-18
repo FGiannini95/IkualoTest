@@ -16,14 +16,14 @@ cd client/server
 npm i
 ```
 4. On the server side create a file .env with the following information:
-   ```
-   - DB_HOST=
-   - DB_USER=
-   - DB_PASS=
-   - DB_NAME=
-   - SECRET=   
-   - PORT=
-   ```
+```
+- DB_HOST=
+- DB_USER=
+- DB_PASS=
+- DB_NAME=
+- SECRET=   
+- PORT=
+```
 5. Start the application:
 ```
 npm run dev
