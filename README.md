@@ -6,7 +6,7 @@ Register & Login aplication
 1. Clone this repository to your local machine:
    ```
    https://github.com/FGiannini95/IkualoTest.git
-2 Move to the application folder:
+ 2 Move to the application folder:
    - cd client/server
 3. Install the dependencies:
    ```
