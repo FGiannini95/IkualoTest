@@ -10,7 +10,7 @@ Register & Login aplication
    - cd client/server
 3. Install the dependencies:
    ```
-   - npm i
+   npm i
 4. On the server side create a file .env with the following information:
    ```
    - DB_HOST=
@@ -21,6 +21,6 @@ Register & Login aplication
    - PORT=
 8. Start the application:
    ```
-   - npm run dev
+   npm run dev
 ## Videos
 - You can see my explication of the project in the following link: https://www.youtube.com/watch?v=bGGg8MzCdNU
